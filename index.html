@@ -1,229 +1,165 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Holi Premium</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Holi 2026 | Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --p1: #FF007A; --p2: #00D4FF; --p3: #FFD700;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: #0f0c29;
+            background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29);
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; color: white;
+        }
 
-<style>
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#ff6a00,#ee0979,#00c9ff);
-  background-size:400% 400%;
-  animation:bg 12s ease infinite;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  overflow:hidden;
-}
+        /* Animated Background Pot */
+        .pot-container {
+            position: absolute; top: 10%; font-size: 5rem;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px var(--p1));
+            z-index: 1;
+        }
 
-@keyframes bg{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(5deg); }
+            50% { transform: translateY(-20px) rotate(-5deg); }
+        }
 
-.card{
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(15px);
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-  width:90%;
-  max-width:420px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.4);
-  color:white;
-  position:relative;
-  z-index:2;
-}
+        .card {
+            position: relative; z-index: 10;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px; border-radius: 40px;
+            width: 90%; max-width: 420px; text-align: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+        }
 
-/* Neon 3D Text */
-h1{
-  font-size:30px;
-  text-shadow:0 0 10px #fff,0 0 20px #ff00de,0 0 40px #ff00de;
-  animation:glow 2s infinite alternate;
-}
+        h1 {
+            font-size: 2.8rem; margin: 0; font-weight: 800;
+            background: linear-gradient(45deg, var(--p1), var(--p2), var(--p3));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
 
-@keyframes glow{
-  from{text-shadow:0 0 10px #fff,0 0 20px #ff00de;}
-  to{text-shadow:0 0 20px #fff,0 0 40px #00fff7;}
-}
+        .wish-text { font-size: 1.1rem; opacity: 0.9; margin: 15px 0; font-weight: 300; }
 
-input{
-  padding:10px;
-  width:90%;
-  border:none;
-  border-radius:8px;
-  margin-bottom:10px;
-}
+        input {
+            width: 100%; padding: 15px; border-radius: 15px; border: none;
+            background: rgba(255,255,255,0.15); color: white;
+            font-size: 1rem; margin-bottom: 20px; outline: none;
+        }
 
-button{
-  padding:10px 15px;
-  border:none;
-  border-radius:8px;
-  margin:5px;
-  cursor:pointer;
-  color:white;
-}
+        .btn-group { display: flex; flex-direction: column; gap: 12px; }
 
-.generate{background:#ff9800;}
-.whatsapp{background:#25D366;}
-.facebook{background:#1877F2;}
-.instagram{background:#E1306C;}
+        .btn {
+            padding: 15px; border-radius: 15px; border: none; cursor: pointer;
+            font-weight: 600; transition: 0.3s; font-size: 1rem;
+        }
 
-.visitor{font-size:14px;margin:10px 0;}
+        .btn-splash {
+            background: linear-gradient(90deg, #ff00cc, #3333ff);
+            color: white; box-shadow: 0 10px 20px rgba(255, 0, 204, 0.3);
+        }
 
-/* Floating Music Button */
-.music-btn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#ff0080;
-  border-radius:50%;
-  width:55px;
-  height:55px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:22px;
-  color:white;
-  cursor:pointer;
-  box-shadow:0 5px 20px rgba(0,0,0,0.4);
-  z-index:3;
-}
+        .share-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        
+        .s-btn {
+            padding: 10px; border-radius: 12px; text-decoration: none;
+            color: white; font-size: 0.8rem; font-weight: bold;
+        }
+        .wa { background: #25D366; } .fb { background: #1877F2; } .copy { background: #444; grid-column: span 2; }
 
-/* Elegant Fireworks */
-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  pointer-events:none;
-  z-index:1;
-}
-</style>
+        .s-btn:hover { transform: translateY(-3px); filter: brightness(1.2); }
+    </style>
 </head>
-
 <body>
 
-<canvas id="fireworks"></canvas>
+    <div class="pot-container">🏺</div>
 
-<div class="card">
+    <div class="card">
+        <h1 id="title">Happy Holi!</h1>
+        <div id="nameHeading" style="font-size: 1.5rem; color: var(--p3); margin-top: 5px;">Friend</div>
+        <p class="wish-text">Sprinkling some digital colors of joy and prosperity your way!</p>
 
-<h1 id="wishText">🌈 Happy Holi 🎉</h1>
+        <input type="text" id="nameInput" placeholder="Enter name to share...">
 
-<input type="text" id="nameInput" placeholder="Enter Your Name">
-<br>
-<button class="generate" onclick="generateWish()">Generate Wish</button>
+        <div class="btn-group">
+            <button class="btn btn-splash" onclick="celebrate()">Launch Color Blast! 🎆</button>
+            <div class="share-grid">
+                <a href="#" id="wa" class="s-btn wa" target="_blank">WhatsApp</a>
+                <a href="#" id="fb" class="s-btn fb" target="_blank">Facebook</a>
+                <button onclick="copyLink()" class="s-btn copy">🔗 Copy Personal Link</button>
+            </div>
+        </div>
+    </div>
 
-<div class="visitor" id="visitorCount"></div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        let currentName = params.get('name') || "Friend";
+        document.getElementById('nameHeading').innerText = currentName;
 
-<h3>Share Your Wish</h3>
+        // Auto-celebrate on load
+        window.onload = () => {
+            setTimeout(celebrate, 500);
+        };
 
-<a id="whatsappShare" target="_blank">
-<button class="whatsapp">WhatsApp</button>
-</a>
+        function celebrate() {
+            const duration = 3 * 1000;
+            const end = Date.now() + duration;
 
-<a id="facebookShare" target="_blank">
-<button class="facebook">Facebook</button>
-</a>
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#FF007A', '#00D4FF', '#FFD700']
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#FF007A', '#00D4FF', '#FFD700']
+                });
 
-<button class="instagram" onclick="copyLink()">Instagram</button>
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
 
-</div>
+        function getLink(name) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('name', name || "Friend");
+            return url.toString();
+        }
 
-<div class="music-btn" onclick="toggleMusic()">🎵</div>
+        function copyLink() {
+            const name = document.getElementById('nameInput').value || currentName;
+            navigator.clipboard.writeText(getLink(name));
+            alert("✨ Link copied for " + (name || "you") + "!");
+        }
 
-<audio id="bgMusic" loop>
-<source src="https://cdn.pixabay.com/download/audio/2023/02/14/audio_6f6b6f3f52.mp3?filename=indian-festival-138859.mp3" type="audio/mp3">
-</audio>
+        // Dynamic share update
+        document.getElementById('nameInput').addEventListener('input', (e) => {
+            const name = e.target.value || "Friend";
+            const link = getLink(name);
+            const text = encodeURIComponent(`🌈 Holi wishes from ${name}! Open your gift here: `);
+            document.getElementById('wa').href = `https://api.whatsapp.com/send?text=${text}${encodeURIComponent(link)}`;
+            document.getElementById('fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
+        });
 
-<script>
-
-/* Auto Name System */
-window.onload=function(){
-  const params=new URLSearchParams(window.location.search);
-  const name=params.get("name");
-  if(name){
-    document.getElementById("wishText").innerHTML=
-    "🌈 Happy Holi from "+name+" 🎉";
-  }
-  updateShareLinks();
-};
-
-/* Generate Wish */
-function generateWish(){
-  var name=document.getElementById("nameInput").value;
-  if(name!=""){
-    document.getElementById("wishText").innerHTML=
-    "🌈 Happy Holi from "+name+" 🎉";
-
-    var newURL=window.location.origin+
-    window.location.pathname+
-    "?name="+encodeURIComponent(name);
-
-    window.history.replaceState({},'',newURL);
-    updateShareLinks();
-  }
-}
-
-/* Visitor Counter */
-if(localStorage.visits){
-  localStorage.visits=Number(localStorage.visits)+1;
-}else{
-  localStorage.visits=1;
-}
-document.getElementById("visitorCount").innerHTML=
-"Total Visitors: "+localStorage.visits;
-
-/* Share */
-function updateShareLinks(){
-  var pageUrl=window.location.href;
-  var message="🌈 Happy Holi! 🎉 See this wish: "+pageUrl;
-
-  document.getElementById("whatsappShare").href=
-  "https://wa.me/?text="+encodeURIComponent(message);
-
-  document.getElementById("facebookShare").href=
-  "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(pageUrl);
-}
-
-function copyLink(){
-  navigator.clipboard.writeText(window.location.href);
-  alert("Link copied!");
-}
-
-/* Music Toggle */
-var music=document.getElementById("bgMusic");
-function toggleMusic(){
-  if(music.paused){
-    music.play();
-  }else{
-    music.pause();
-  }
-}
-
-/* Elegant Fireworks */
-var canvas=document.getElementById("fireworks");
-var ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-function firework(){
-  var x=Math.random()*canvas.width;
-  var y=Math.random()*canvas.height/2;
-  for(var i=0;i<20;i++){
-    ctx.beginPath();
-    ctx.arc(x+Math.random()*80-40,y+Math.random()*80-40,2,0,Math.PI*2);
-    ctx.fillStyle="hsl("+Math.random()*360+",100%,60%)";
-    ctx.fill();
-  }
-}
-setInterval(firework,1000);
-
-</script>
-
+        // Initialize links
+        document.getElementById('nameInput').dispatchEvent(new Event('input'));
+    </script>
 </body>
-  </html>
+</html>
