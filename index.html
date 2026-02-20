@@ -1,205 +1,174 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Happy Holi Wishes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Holi Wishes</title>
 
-  <!-- 💰 AdSense (Replace with your real ID later) -->
-  <script async 
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX"
-    crossorigin="anonymous"></script>
+<style>
+body {
+  margin:0;
+  padding:0;
+  text-align:center;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(45deg,#ff0080,#ff8c00,#40e0d0,#ff0080);
+  background-size:400% 400%;
+  animation:bg 10s infinite alternate;
+  color:white;
+}
 
-  <style>
-    body{
-      margin:0;
-      font-family:'Segoe UI',sans-serif;
-      text-align:center;
-      background:linear-gradient(135deg,#ff512f,#dd2476,#1fa2ff);
-      background-size:300% 300%;
-      animation:bg 8s infinite alternate;
-      color:white;
-      overflow-x:hidden;
-    }
-    @keyframes bg{
-      0%{background-position:left;}
-      100%{background-position:right;}
-    }
-    .card{
-      margin:70px auto;
-      background:rgba(0,0,0,0.6);
-      padding:30px;
-      border-radius:20px;
-      width:90%;
-      max-width:420px;
-      box-shadow:0 0 25px rgba(0,0,0,0.5);
-    }
-    input{
-      padding:12px;
-      width:85%;
-      border-radius:8px;
-      border:none;
-      margin-top:10px;
-    }
-    button{
-      padding:12px 20px;
-      margin-top:12px;
-      border-radius:8px;
-      border:none;
-      cursor:pointer;
-      font-weight:bold;
-    }
-    .generate{background:#ff9800;color:white;}
-    .share{background:#25D366;color:white;}
-    #wishMessage{
-      margin-top:20px;
-      font-size:20px;
-      font-weight:bold;
-      color:#ffeb3b;
-    }
-    canvas{
-      position:fixed;
-      top:0;
-      left:0;
-      z-index:-1;
-    }
-  </style>
+@keyframes bg {
+  0%{background-position:left;}
+  100%{background-position:right;}
+}
+
+h1{
+  margin-top:40px;
+  font-size:35px;
+  text-shadow:2px 2px 5px black;
+}
+
+input{
+  padding:10px;
+  font-size:18px;
+  border-radius:5px;
+  border:none;
+}
+
+button{
+  padding:10px 20px;
+  margin:8px;
+  border:none;
+  border-radius:5px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.share-btn{
+  color:white;
+}
+
+#fireworks{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+</style>
 </head>
 
 <body>
 
-<!-- 🎵 Dhol Spiritual Music -->
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8d7b6d5f4.mp3?filename=indian-dhol-festival-11051.mp3" type="audio/mpeg">
-</audio>
+<h1 id="wishText">🌈 Happy Holi 🎉</h1>
+
+<input type="text" id="nameInput" placeholder="Enter Your Name">
+<br>
+<button onclick="generateWish()">Generate Wish</button>
+
+<h3 id="visitorCount"></h3>
+
+<div style="margin-top:30px;">
+<h2>Share This Holi Wish 🎉</h2>
+
+<a id="whatsappShare" target="_blank">
+<button class="share-btn" style="background:#25D366;">WhatsApp</button>
+</a>
+
+<a id="facebookShare" target="_blank">
+<button class="share-btn" style="background:#1877F2;">Facebook</button>
+</a>
+
+<button onclick="copyLink()" class="share-btn" style="background:#E1306C;">
+Instagram (Copy Link)
+</button>
+</div>
 
 <canvas id="fireworks"></canvas>
 
-<div class="card">
-  <h1>🌈 Happy Holi 🌈</h1>
-  <p>Create & Share Your Holi Wish 🎨</p>
-
-  <input type="text" id="nameInput" placeholder="Enter your name">
-  <br>
-  <button class="generate" onclick="generateWish()">Generate Wish</button>
-
-  <div id="wishMessage"></div>
-
-  <button class="share" onclick="shareWhatsApp()">Share on WhatsApp</button>
-
-  <!-- 👁 Visitor Counter -->
-  <div style="margin-top:20px;">
-    <h3>👁 Total Visitors</h3>
-    <img src="https://api.visitorbadge.io/api/visitors?path=happyholi-manorama&countColor=%23FFD700&style=flat"/>
-  </div>
-
-  <!-- 📢 AdSense Slot -->
-  <ins class="adsbygoogle"
-       style="display:block;margin-top:20px"
-       data-ad-client="ca-pub-XXXXXXXX"
-       data-ad-slot="1234567890"
-       data-ad-format="auto"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-
-</div>
+<audio id="bgMusic" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8f5b0e0e7e.mp3?filename=indian-dhol-110363.mp3" type="audio/mp3">
+</audio>
 
 <script>
-/* 🔗 Auto Name From URL */
+
+/* 🔥 AUTO NAME FROM URL */
 window.onload=function(){
   const params=new URLSearchParams(window.location.search);
   const name=params.get("name");
   if(name){
-    document.getElementById("wishMessage").innerHTML=
-    "🎉 "+name+" wishes you a Very Happy Holi! 🎨✨";
+    document.getElementById("wishText").innerHTML=
+    "🌈 Happy Holi from "+name+" 🎉";
+  }
+};
+
+/* Generate Wish + Create Viral Link */
+function generateWish(){
+  var name=document.getElementById("nameInput").value;
+  if(name!=""){
+    document.getElementById("wishText").innerHTML=
+    "🌈 Happy Holi from "+name+" 🎉";
+
+    var newURL=window.location.origin+
+    window.location.pathname+
+    "?name="+encodeURIComponent(name);
+
+    window.history.replaceState({},'',newURL);
   }
 }
 
-/* 🎉 Generate Wish */
-function generateWish(){
-  var name=document.getElementById("nameInput").value;
-  if(name===""){alert("Enter your name");return;}
-  document.getElementById("wishMessage").innerHTML=
-  "🎉 "+name+" wishes you a Very Happy Holi! 🎨✨";
+/* Visitor Counter */
+if(localStorage.visits){
+  localStorage.visits = Number(localStorage.visits)+1;
+}else{
+  localStorage.visits = 1;
+}
+document.getElementById("visitorCount").innerHTML=
+"Total Visitors: "+localStorage.visits;
 
-  var newURL=window.location.origin+window.location.pathname+"?name="+encodeURIComponent(name);
-  window.history.pushState({},'',newURL);
+/* Share Links (Auto Viral Link) */
+function updateShareLinks(){
+  var pageUrl=window.location.href;
+  var message="🌈 Happy Holi! 🎉 See this special wish: "+pageUrl;
+
+  document.getElementById("whatsappShare").href=
+  "https://wa.me/?text="+encodeURIComponent(message);
+
+  document.getElementById("facebookShare").href=
+  "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(pageUrl);
 }
 
-/* 📲 WhatsApp Share */
-function shareWhatsApp(){
-  var name=document.getElementById("nameInput").value;
-  if(name===""){alert("Enter name first");return;}
+updateShareLinks();
 
-  var shareURL=window.location.href;
-  var msg=name+" wishes you a Happy Holi! 🎨✨\n\nClick here 👉 "+shareURL;
-  window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank");
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href);
+  alert("Link copied! Paste on Instagram Story or Bio.");
 }
 
-/* 🎆 Beat Sync Fireworks */
+/* Music */
+document.addEventListener("click",function(){
+  document.getElementById("bgMusic").play();
+});
+
+/* Fireworks */
 var canvas=document.getElementById("fireworks");
 var ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
-var particles=[];
-var music=document.getElementById("bgMusic");
-
-var audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-var analyser=audioCtx.createAnalyser();
-var source=audioCtx.createMediaElementSource(music);
-source.connect(analyser);
-analyser.connect(audioCtx.destination);
-analyser.fftSize=256;
-
-var bufferLength=analyser.frequencyBinCount;
-var dataArray=new Uint8Array(bufferLength);
-
-function createFirework(intensity){
+function firework(){
   var x=Math.random()*canvas.width;
   var y=Math.random()*canvas.height/2;
-  var count=20+intensity/5;
-  for(var i=0;i<count;i++){
-    particles.push({
-      x:x,y:y,
-      speedX:(Math.random()-0.5)*6,
-      speedY:(Math.random()-0.5)*6,
-      life:60,
-      color:"hsl("+Math.random()*360+",100%,50%)"
-    });
+  for(var i=0;i<30;i++){
+    ctx.beginPath();
+    ctx.arc(x+Math.random()*100-50,y+Math.random()*100-50,3,0,Math.PI*2);
+    ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)";
+    ctx.fill();
   }
 }
+setInterval(firework,800);
 
-function animate(){
-  requestAnimationFrame(animate);
-  analyser.getByteFrequencyData(dataArray);
-  var bass=dataArray[1];
-
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  if(bass>180){
-    createFirework(bass);
-  }
-
-  particles.forEach(function(p,i){
-    p.x+=p.speedX;
-    p.y+=p.speedY;
-    p.life--;
-    ctx.fillStyle=p.color;
-    ctx.fillRect(p.x,p.y,3,3);
-    if(p.life<=0)particles.splice(i,1);
-  });
-}
-
-document.body.addEventListener("click",function(){
-  if(audioCtx.state==="suspended"){
-    audioCtx.resume();
-  }
-  music.play();
-});
-
-animate();
 </script>
 
 </body>
-</html>#80FF00
+</html>
